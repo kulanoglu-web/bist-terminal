@@ -1,106 +1,119 @@
-<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0a0e14"><title>BIST Terminal</title>
+<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#07111f"><title>BIST Terminal</title>
 <style>
-:root{--bg:#0a0e14;--p:#121821;--b:#1f2937;--t:#d6deeb;--m:#7a8699;--g:#22c55e;--r:#ef4444;--a:#f59e0b;--c:#38bdf8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3f5f8;--p:#fff;--b:#d8dee8;--t:#111827;--m:#6b7280;--g:#15803d;--r:#b91c1c;--a:#b45309;--c:#0369a1}}
-:root[data-theme="light"]{--bg:#f3f5f8;--p:#fff;--b:#d8dee8;--t:#111827;--m:#6b7280;--g:#15803d;--r:#b91c1c;--a:#b45309;--c:#0369a1}
-:root[data-theme="dark"]{--bg:#0a0e14;--p:#121821;--b:#1f2937;--t:#d6deeb;--m:#7a8699;--g:#22c55e;--r:#ef4444;--a:#f59e0b;--c:#38bdf8}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;padding-bottom:70px}
-header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--b)}
-.hd{display:flex;justify-content:space-between;padding:8px 12px;font-weight:700;letter-spacing:.5px}.hd small{color:var(--m);font-weight:400}
-.tape{display:flex;gap:14px;overflow-x:auto;padding:4px 12px 6px;white-space:nowrap;font-size:11px}
-main{padding:10px 10px}.card{background:var(--p);border:1px solid var(--b);border-radius:8px;padding:10px;margin-bottom:10px}
-h3{margin:0 0 6px;font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:1px}
+:root{--bg:#07111f;--p:#0e1b2e;--b:#1b2d45;--t:#dbe6f5;--m:#7f93ad;--g:#22c55e;--r:#ef4444;--a:#f59e0b;--c:#3b82f6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef2f7;--p:#fff;--b:#d5dde8;--t:#101827;--m:#5b6b80;--g:#15803d;--r:#b91c1c;--a:#b45309;--c:#1d4ed8}}
+:root[data-theme="light"]{--bg:#eef2f7;--p:#fff;--b:#d5dde8;--t:#101827;--m:#5b6b80;--g:#15803d;--r:#b91c1c;--a:#b45309;--c:#1d4ed8}
+:root[data-theme="dark"]{--bg:#07111f;--p:#0e1b2e;--b:#1b2d45;--t:#dbe6f5;--m:#7f93ad;--g:#22c55e;--r:#ef4444;--a:#f59e0b;--c:#3b82f6}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t);font:13px/1.45 system-ui,-apple-system,Roboto,sans-serif;padding-bottom:74px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--b)}
+.hd{display:flex;align-items:center;gap:10px;padding:10px 12px}.lg{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#ef4444,#b91c1c);display:grid;place-items:center;font-weight:800;color:#fff}.hd small{display:block;color:var(--m);font-size:11px}.hd .x{margin-left:auto;font-size:10px;color:var(--m);border:1px solid var(--b);border-radius:12px;padding:3px 8px}
+.tape{display:flex;gap:14px;overflow-x:auto;padding:0 12px 7px;white-space:nowrap;font-size:11px}
+main{padding:10px}.v{display:none}.v.on{display:block}
+.card{background:var(--p);border:1px solid var(--b);border-radius:12px;padding:12px;margin-bottom:10px}
+h3{margin:0 0 8px;font-size:12px;color:var(--m);font-weight:600;letter-spacing:.3px}
 .g{color:var(--g)}.r{color:var(--r)}.a{color:var(--a)}.m{color:var(--m)}
-.scroll{overflow-x:auto}table{width:100%;border-collapse:collapse}th{color:var(--m);font-weight:400;text-align:right;font-size:11px;padding:4px}td{padding:6px 4px;text-align:right;border-top:1px solid var(--b);white-space:nowrap}th:first-child,td:first-child{text-align:left}
-tr.k{cursor:pointer}.pill{padding:2px 6px;border-radius:4px;font-size:11px;font-weight:700}
-.bar{display:inline-block;height:6px;border-radius:3px;vertical-align:middle}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.kv{background:var(--bg);border-radius:6px;padding:6px}.kv b{display:block;font-size:15px}
-input,select,button{font:inherit;background:var(--bg);color:var(--t);border:1px solid var(--b);border-radius:6px;padding:8px}
-button.pr{background:var(--c);color:#031018;border:0;font-weight:700}
-.row{display:flex;gap:6px;margin-bottom:8px}.row input{flex:1;text-transform:uppercase}
-canvas{width:100%;height:300px;display:block}
+table{width:100%;border-collapse:collapse}th{color:var(--m);font-weight:500;text-align:right;font-size:11px;padding:4px 3px}td{padding:7px 3px;text-align:right;border-top:1px solid var(--b);white-space:nowrap}th:first-child,td:first-child{text-align:left}tr[data-a]{cursor:pointer}
+.pl{display:inline-block;min-width:62px;text-align:center;padding:4px 6px;border-radius:6px;font-size:11px;font-weight:800;color:#fff}.pl.g{background:#16a34a}.pl.r{background:#dc2626}.pl.a{background:#d97706}
+.row{display:flex;gap:8px;margin-bottom:10px}input,button{font:inherit;color:var(--t);background:var(--p);border:1px solid var(--b);border-radius:10px;padding:10px}.row input{flex:1;text-transform:uppercase}
+button.pr{background:var(--c);color:#fff;border:0;font-weight:700}
+.chs{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px}.ch{border-radius:18px;padding:7px 14px;white-space:nowrap;color:var(--m)}.ch.on{background:var(--c);color:#fff;border-color:var(--c)}
+.qk{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.qk button{padding:10px 2px;font-size:11px;display:flex;flex-direction:column;gap:4px;align-items:center}.qk span{font-size:20px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.tile{background:var(--p);border:1px solid var(--b);border-radius:10px;padding:10px;display:flex;flex-direction:column}.tile b{font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.kv{background:var(--bg);border-radius:8px;padding:8px}.kv span{color:var(--m);font-size:11px;display:block}.kv b{font-size:15px}
+canvas{width:100%;height:380px;display:block;border-radius:8px}.big{font-size:26px;font-weight:800}
+.rng{height:6px;background:var(--b);border-radius:3px;position:relative;margin:10px 0 4px}.rng i{position:absolute;top:-4px;width:4px;height:14px;background:var(--c);border-radius:2px}
 nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--p);border-top:1px solid var(--b);padding-bottom:env(safe-area-inset-bottom,0px)}
-nav button{flex:1;border:0;border-radius:0;background:none;padding:12px 0;color:var(--m);font-weight:700}nav button.on{color:var(--c);box-shadow:inset 0 2px var(--c)}
-.v{display:none}.v.on{display:block}input[type=range]{width:100%;padding:0}.note{font-size:11px;color:var(--m)}
+nav button{flex:1;border:0;border-radius:0;background:none;padding:8px 0;color:var(--m);font-size:10px;display:flex;flex-direction:column;align-items:center;gap:2px}nav button b{font-size:18px}nav button.on{color:var(--c)}
+input[type=range]{width:100%;padding:0}.note{font-size:11px;color:var(--m)}.scroll{overflow-x:auto}
 </style></head><body>
-<header><div class="hd"><span>◼ BIST TERMİNAL</span><small id="src">yükleniyor…</small></div><div class="tape" id="tape"></div></header>
-<main>
-<section class="v on" id="v0"><div class="card"><div class="row"><select id="srt"><option value="c">Sıralama: Birleşik</option><option value="s">Kısa vade</option><option value="l">Uzun vade</option></select></div>
-<div class="scroll"><table><thead><tr><th>Hisse</th><th>Fiyat</th><th>1G</th><th>Kısa</th><th>Uzun</th><th>Sinyal</th></tr></thead><tbody id="tb"></tbody></table></div></div>
-<div class="note">Satıra dokun → derin analiz. Skorlar −100…+100. Yatırım tavsiyesi değildir.</div></section>
-
-<section class="v" id="v1"><div class="row"><input id="tk" list="ul" value="THYAO"><datalist id="ul"></datalist><button class="pr" id="go">ANALİZ</button></div>
-<div class="card"><canvas id="cv"></canvas></div><div id="an"></div></section>
-
-<section class="v" id="v2"><div class="card"><h3>İndikatörsüz geriye dönük deneme</h3><div class="note" style="margin-bottom:8px">Rastgele geçmiş tarihlerde 4 hisse alınır; 20 gün (kısa) ve 120 gün (uzun) sonrası izlenir. "Skor" o gün hesaplanan sinyaldir, karar için kullanılmaz.</div><button class="pr" id="bt">TESTİ ÇALIŞTIR</button></div><div id="bo"></div></section>
-
-<section class="v" id="v3"><div class="card"><h3>Makro etkenler (−2 olumsuz … +2 olumlu)</h3><div id="mc"></div><div class="note">Makro skor kısa vadeye %10, uzun vadeye %30 etki eder. Bankalar faize 2.5× duyarlıdır (mikro etki).</div></div>
-<div class="card"><h3>Veri kaynakları</h3><div class="note">Yahoo Finance bağlayıcısı kodda hazır (chart API). Bağlanamazsa DEMO verisi kullanılır. BIST/Investing için sunucu tarafı proxy gerekir; Android paketlemede (Capacitor) CORS sorunu olmadan çalışır.</div></div></section>
-</main>
-<nav><button class="on" data-t="0">TARAMA</button><button data-t="1">ANALİZ</button><button data-t="2">TEST</button><button data-t="3">MAKRO</button></nav>
+<header><div class="hd"><div class="lg">BT</div><div><b>BIST Terminal</b><small>Piyasaları bir adım önde takip et</small></div><span class="x" id="src">yükleniyor</span></div><div class="tape" id="tape"></div></header>
+<main><section class="v on" id="v0"></section><section class="v" id="v1"></section><section class="v" id="v2"></section><section class="v" id="v3"></section><section class="v" id="v4"></section></main>
+<nav id="nv"></nav><datalist id="ul"></datalist>
 <script>
-const $=s=>document.querySelector(s),U=['THYAO','ASELS','GARAN','AKBNK','EREGL','KCHOL','BIMAS','TUPRS','SISE','FROTO','PGSUS','SAHOL','TCELL','YKBNK'],BANK=['GARAN','AKBNK','YKBNK'];
-const D={},SRC={};let M={faiz:0,enf:0,risk:0,kur:0};
-const f=(x,d=2)=>x.toFixed(d),cl=(x,a=100)=>Math.max(-a,Math.min(a,x)),avg=(a,n)=>a.slice(-n).reduce((x,y)=>x+y,0)/Math.min(n,a.length),col=x=>x>0?'g':x<0?'r':'m';
+const $=s=>document.querySelector(s),U=['THYAO','ASELS','GARAN','AKBNK','EREGL','KCHOL','BIMAS','TUPRS','SISE','FROTO','PGSUS','SAHOL','TCELL','YKBNK','OTKAR','TABGD'],BANK=['GARAN','AKBNK','YKBNK'];
+// ZİRAAT YATIRIM TEKNİK ANALİZ RAPORU (7 Ekim 2026) — günlük güncellenebilir veri bloğu
+const RPT={tarih:'7 Ekim 2026',
+rec:{GARAN:{c:131.2,s1:135.2,s2:135.5,stop:129.9},OTKAR:{c:341.25,s1:351.5,s2:352,stop:337},TABGD:{c:224.9,s1:231.7,s2:232.1,stop:222.7}},
+sum:{GARAN:{beta:1.18,z:.26,wk:127.32,mo:130.52,hi:131.4,lo:122.5,vol:2285,vm:4283},OTKAR:{beta:.67,z:.06,wk:322.6,mo:312.43,hi:357,lo:275,vol:316,vm:140},TABGD:{beta:.62,z:0,wk:222.2,mo:226.24,hi:229,lo:210.9,vol:71,vm:161}},
+idx:[['XU100','BIST 100',12374,-.56,.7,-11.7,15.3],['XBANK','BIST Banka',16188,.66,.3,-2.5,11.9],['XUSIN','BIST Sınai',15864,-1.21,-1.5,-17.5,13.7],['XTUMY','BIST Tüm-100',48631,-1.13,-5.4,-34.8,-7.6]],
+bist:{sup:[12260,12180,12085],res:[12440,12575,12680],y:'Endeks kısa vadeli ortalamaların üzerinde ama hacim düşük. 12.260 üstünde kalındıkça 12.440 direnci denenebilir; aksi halde ana destek 12.085. Yatay açılış bekleniyor.'},
+viop:{sup:[15625,15465,15320],res:[15750,15900,16040],y:'Kontrat güç kazanmakta zorlanıyor ama desteklerin üzerinde. 15.625 korundukça 15.750 direnci, ardından kanal üst bandı hedeflenir; kırılırsa ana destek 15.320.'}};
+const REG=(()=>{const x=RPT.idx[0];return Math.max(-60,Math.min(60,(x[2]>RPT.bist.sup[0]?15:-25)+x[5]*1.5+x[4]*3))})();
+const D={},SRC={};let M={faiz:0,enf:0,risk:0,kur:0},UR=[],RF={f:'all',s:'c'},ST={t:'THYAO',tab:'g',per:66};
+const f=(x,d=2)=>Number(x).toLocaleString('tr-TR',{minimumFractionDigits:d,maximumFractionDigits:d}),cl=(x,a=100)=>Math.max(-a,Math.min(a,x)),avg=(a,n)=>a.slice(-n).reduce((x,y)=>x+y,0)/Math.min(n,a.length),col=x=>x>0?'g':x<0?'r':'m';
+const sd=(a,n)=>{const s=a.slice(-n),m=avg(s,n);return Math.sqrt(s.reduce((x,y)=>x+(y-m)**2,0)/s.length)||1},zs=(c,n)=>(c[c.length-1]-avg(c,n))/sd(c,n);
 function rng(s){return()=>(s=(s*1664525+1013904223)>>>0)/4294967296}
-function synth(t){let h=7;for(const c of t)h=(h*31+c.charCodeAt(0))>>>0;const r=rng(h);let p=20+r()*200,dr=0,vo=.014+r()*.012,d=[];for(let i=0;i<620;i++){if(i%90==0)dr=(r()-.42)*.002;const g=(r()+r()+r()-1.5)*2;p*=1+dr+vo*g;d.push({c:p,h:p*(1+r()*.012),l:p*(1-r()*.012),v:1e6*(1+r()*3)*(1+Math.abs(g))})}return d}
-async function load(t){if(D[t])return D[t];try{const s=t.includes('.')||t.includes('^')?t:t+'.IS',r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+s+'?range=3y&interval=1d'),j=await r.json(),q=j.chart.result[0],z=q.indicators.quote[0];D[t]=q.timestamp.map((_,i)=>({c:z.close[i],h:z.high[i],l:z.low[i],v:z.volume[i]||1})).filter(x=>x.c);SRC[t]='Yahoo'}catch(e){D[t]=synth(t);SRC[t]='DEMO'}return D[t]}
+function synth(t){let h=7;for(const c of t)h=(h*31+c.charCodeAt(0))>>>0;const r=rng(h);let p=20+r()*200,dr=0,vo=.014+r()*.012,d=[];for(let i=0;i<620;i++){if(i%90==0)dr=(r()-.42)*.002;const g=(r()+r()+r()-1.5)*2,o=p;p*=1+dr+vo*g;d.push({o,c:p,h:Math.max(o,p)*(1+r()*.01),l:Math.min(o,p)*(1-r()*.01),v:1e6*(1+r()*3)*(1+Math.abs(g))})}
+const R=RPT.rec[t];if(R){const k=R.c/p;d.forEach(b=>{b.o*=k;b.c*=k;b.h*=k;b.l*=k})}return d}
+async function load(t){if(D[t])return D[t];try{const s=t.includes('.')||t.includes('^')?t:t+'.IS',r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/'+s+'?range=3y&interval=1d'),j=await r.json(),q=j.chart.result[0],z=q.indicators.quote[0];D[t]=q.timestamp.map((_,i)=>({o:z.open[i],c:z.close[i],h:z.high[i],l:z.low[i],v:z.volume[i]||1})).filter(x=>x.c&&x.o);SRC[t]='Yahoo'}catch(e){D[t]=synth(t);SRC[t]='DEMO'}return D[t]}
 const ema=(a,n)=>{const k=2/(n+1);let e=a[0];return a.map((x,i)=>i?e=x*k+e*(1-k):e)};
 function rsi(c,n=14){const o=Array(c.length).fill(null);let g=0,l=0;for(let i=1;i<c.length;i++){const d=c[i]-c[i-1],u=Math.max(d,0),w=Math.max(-d,0);if(i<=n){g+=u/n;l+=w/n}else{g=(g*(n-1)+u)/n;l=(l*(n-1)+w)/n}if(i>=n)o[i]=l==0?100:100-100/(1+g/l)}return o}
 function atr(d,n=14){let a=0;const s=d.slice(-n-1);for(let i=1;i<s.length;i++)a+=Math.max(s[i].h-s[i].l,Math.abs(s[i].h-s[i-1].c),Math.abs(s[i].l-s[i-1].c));return a/n}
-function bbw(c,i){const s=c.slice(i-19,i+1),m=avg(s,20),sd=Math.sqrt(s.reduce((a,b)=>a+(b-m)**2,0)/20);return{m,u:m+2*sd,l:m-2*sd,w:4*sd/m}}
+function bbw(c,i){const s=c.slice(i-19,i+1),m=avg(s,20),q=Math.sqrt(s.reduce((a,b)=>a+(b-m)**2,0)/20);return{m,u:m+2*q,l:m-2*q,w:4*q/m}}
 function ind(d){const c=d.map(x=>x.c),n=c.length-1,R=rsi(c),e12=ema(c,12),e26=ema(c,26),m=e12.map((x,i)=>x-e26[i]),sg=ema(m,9),h=m.map((x,i)=>x-sg[i]),b=bbw(c,n),pb=(c[n]-b.l)/(b.u-b.l);
 const ws=[];for(let j=Math.max(19,n-120);j<=n;j++)ws.push(bbw(c,j).w);const pct=ws.filter(x=>x<b.w).length/ws.length*100;
-// ÖZEL 1: Trend Verimliliği (TEI)
-const tei=(c[n]-c[n-20])/c.slice(n-19).reduce((s,x,k)=>s+Math.abs(x-c[n-20+k]),0);
-// ÖZEL 2: Sıkışma Baskısı (VSP)
-const vsp=(100-pct)/100*Math.sign(c[n]-b.m);
-// ÖZEL 3: Hacim Ağırlıklı Yorgunluk (VWE)
-const s50=avg(c,50),sd=Math.sqrt(c.slice(-50).reduce((s,x)=>s+(x-s50)**2,0)/50),vv=d.map(x=>x.v),vwe=(c[n]-s50)/sd*(avg(vv,5)/avg(vv,50));
-return{c,n,r:R[n],R,h:h[n],hp:h[n-1],pb,b,pct,tei,vsp,vwe,s20:avg(c,20),s50,s200:avg(c,200),p:c[n],mom:c[n]/c[Math.max(0,n-250)]-1,d1:c[n]/c[n-1]-1,at:atr(d)}}
-function macro(t){const w=BANK.includes(t)?2.5:1.5;return cl((M.faiz*w+M.enf+M.risk*1.5+M.kur)/10*100)}
-function score(d,t,rs=0,mac=true){const x=ind(d),rp=x.r<30?20:x.r>75?-20:(x.r-50)*.4,mp=x.h>0?(x.h>x.hp?22:8):(x.h>x.hp?-8:-22);
-let st=cl(rp+mp+x.tei*35+x.vsp*20-cl(x.vwe,3)*8),lt=cl((x.s50>x.s200?20:-20)+(x.p>x.s200?15:-15)+cl(x.mom*100,40)*.75+rs*.5),mc=mac?macro(t):0;
-return{st:cl(st+mc*.1),lt:cl(lt+mc*.3),mc,x}}
-const sig=v=>v>40?['GÜÇLÜ AL','g']:v>15?['AL','g']:v<-40?['GÜÇLÜ SAT','r']:v<-15?['SAT','r']:['NÖTR','a'];
-let UM=0;const rsOf=t=>cl((ind(D[t]).mom-UM)*100,40);
-function scan(){UM=U.reduce((s,t)=>s+ind(D[t]).mom,0)/U.length;const k=$('#srt').value;
-const R=U.map(t=>({t,s:score(D[t],t,rsOf(t))})).map(o=>({...o,c:(o.s.st+o.s.lt)/2})).sort((a,b)=>k=='s'?b.s.st-a.s.st:k=='l'?b.s.lt-a.s.lt:b.c-a.c);
-$('#tb').innerHTML=R.map(o=>{const[g,c]=sig(o.c),x=o.s.x;return`<tr class="k" data-t="${o.t}"><td><b>${o.t}</b></td><td>${f(x.p)}</td><td class="${col(x.d1)}">${f(x.d1*100)}%</td><td class="${col(o.s.st)}">${f(o.s.st,0)}</td><td class="${col(o.s.lt)}">${f(o.s.lt,0)}</td><td><span class="pill ${c}" style="background:color-mix(in srgb,var(--${c=='g'?'g':c=='r'?'r':'a'}) 20%,transparent)">${g}</span></td></tr>`}).join('');
-$('#tape').innerHTML=R.map(o=>`<span>${o.t} <span class="${col(o.s.x.d1)}">${o.s.x.d1>=0?'▲':'▼'}${f(Math.abs(o.s.x.d1)*100)}%</span></span>`).join('');
-const live=Object.values(SRC).filter(v=>v=='Yahoo').length;$('#src').textContent=live?`Yahoo canlı (${live})`:'DEMO verisi'}
-async function analyze(t){t=t.trim().toUpperCase();if(!t)return;$('#an').innerHTML='<div class="card">Yükleniyor…</div>';const d=await load(t);if(d.length<260){$('#an').innerHTML='<div class="card r">Yetersiz veri</div>';return}
-UM=U.reduce((s,u)=>s+ind(D[u]).mom,0)/U.length;const s=score(d,t,cl((ind(d).mom-UM)*100,40)),x=s.x,[a1,c1]=sig(s.st),[a2,c2]=sig(s.lt);draw(x);
-const K=(l,v,c='')=>`<div class="kv"><span class="m">${l}</span><b class="${c}">${v}</b></div>`;
-$('#an').innerHTML=`<div class="card"><h3>${t} · ${SRC[t]} · ${f(x.p)}</h3><div class="grid">${K('KISA VADE',a1+' '+f(s.st,0),c1)}${K('UZUN VADE',a2+' '+f(s.lt,0),c2)}${K('MAKRO',f(s.mc,0),col(s.mc))}${K('RSI 14',f(x.r,1),x.r>70?'r':x.r<30?'g':'')}${K('MACD Hist',f(x.h,3),col(x.h))}${K('Bollinger %B',f(x.pb*100,0)+'%')}${K('SMA50/200',x.s50>x.s200?'Golden':'Death',x.s50>x.s200?'g':'r')}${K('12A Getiri',f(x.mom*100,1)+'%',col(x.mom))}${K('ATR',f(x.at))}</div></div>
-<div class="card"><h3>Özel indikatörler</h3><div class="grid">${K('TEI',f(x.tei,2),col(x.tei))}${K('VSP',f(x.vsp,2),col(x.vsp))}${K('VWE',f(x.vwe,2),x.vwe>2?'r':x.vwe<-2?'g':'')}</div><div class="note" style="margin-top:6px"><b>TEI</b> Trend Verimliliği: 20 günlük net hareket / toplam yol (±1; yüksek = temiz trend).<br><b>VSP</b> Sıkışma Baskısı: Bollinger genişliğinin 120 günlük yüzdeliği tersi × yön (sıkışma kırılmaya hazırlanır).<br><b>VWE</b> Hacim Ağırlıklı Yorgunluk: SMA50'den sapma z-skoru × hacim oranı (&gt;2 aşırı ısınma, &lt;−2 satış tükenişi).</div></div>
-<div class="card"><h3>İşlem planı (ATR tabanlı)</h3>Giriş ≈ ${f(x.p)} · Stop ${f(x.p-2*x.at)} (${f(-2*x.at/x.p*100,1)}%) · Hedef ${f(x.p+3*x.at)} (+${f(3*x.at/x.p*100,1)}%) · R:R 1.5<div class="note">Yatırım tavsiyesi değildir.</div></div>`}
-function draw(x){const cv=$('#cv'),W=cv.width=cv.clientWidth*2,H=cv.height=600,g=cv.getContext('2d'),cs=getComputedStyle(document.documentElement),C=k=>cs.getPropertyValue(k).trim(),N=150,c=x.c,n=x.n,i0=n-N+1,ph=H*.7,rh=H*.22;
-const bb=[],s5=[];for(let i=i0;i<=n;i++){bb.push(bbw(c,i));s5.push(avg(c.slice(0,i+1),50))}
-const all=c.slice(i0).concat(bb.map(b=>b.u),bb.map(b=>b.l)),mx=Math.max(...all),mn=Math.min(...all),X=i=>i/(N-1)*(W-10)+5,Y=v=>10+(1-(v-mn)/(mx-mn))*(ph-20);
-const ln=(a,y,cc,w=2)=>{g.beginPath();a.forEach((v,i)=>i?g.lineTo(X(i),y(v)):g.moveTo(X(i),y(v)));g.strokeStyle=cc;g.lineWidth=w;g.stroke()};
-g.fillStyle=C('--p');g.fillRect(0,0,W,H);g.strokeStyle=C('--b');g.lineWidth=1;for(let k=0;k<5;k++){g.beginPath();g.moveTo(0,ph/5*k);g.lineTo(W,ph/5*k);g.stroke()}
-ln(bb.map(b=>b.u),Y,C('--m'),1);ln(bb.map(b=>b.l),Y,C('--m'),1);ln(s5,Y,C('--a'),2);ln(c.slice(i0),Y,C('--c'),3);
-const R=x.R.slice(i0),ry=v=>ph+20+(1-v/100)*rh;g.strokeStyle=C('--b');[30,70].forEach(v=>{g.beginPath();g.moveTo(0,ry(v));g.lineTo(W,ry(v));g.stroke()});ln(R,ry,C('--g'),2);
-g.fillStyle=C('--m');g.font='22px monospace';g.fillText('Fiyat · SMA50 · Bollinger',8,24);g.fillText('RSI',8,ph+36)}
-function bt(){const L=t=>D[t].length,out=[];let sw=0,lw=0,sa=0,la=0,N=0,ss=0,ls=0;
-for(let r=0;r<6;r++){const k=125+Math.floor(Math.random()*(L(U[0])-261-125)),pk=[...U].sort(()=>Math.random()-.5).slice(0,4);
-const ret=(t,h)=>{const c=D[t],i=c.length-1-k;return c[i+h].c/c[i].c-1};
-const sh=pk.map(t=>ret(t,20)),lo=pk.map(t=>ret(t,120)),us=U.map(t=>ret(t,20)),ul=U.map(t=>ret(t,120)),sc=pk.map(t=>{const c=D[t].slice(0,D[t].length-k);return score(c,t,0,false)});
-const a=v=>v.reduce((x,y)=>x+y)/v.length;out.push({k,pk,s:a(sh),l:a(lo),us:a(us),ul:a(ul),sc:a(sc.map(z=>(z.st+z.lt)/2))});}
-const a=v=>v.reduce((x,y)=>x+y)/v.length,hit=(v,u)=>v.filter((x,i)=>x>u[i]).length;
-// sinyal doğrulama
-const B={AL:[],NO:[],SAT:[]},BL={AL:[],NO:[],SAT:[]};for(let q=0;q<300;q++){const t=U[Math.floor(Math.random()*U.length)],k=125+Math.floor(Math.random()*(D[t].length-261-125)),c=D[t],i=c.length-1-k,s=score(c.slice(0,i+1),t,0,false),b=s.st>15?'AL':s.st<-15?'SAT':'NO',b2=s.lt>15?'AL':s.lt<-15?'SAT':'NO';B[b].push(c[i+20].c/c[i].c-1);BL[b2].push(c[i+120].c/c[i].c-1)}
-const P=v=>`<span class="${col(v)}">${f(v*100,1)}%</span>`,ro=o=>`<tr><td>${o.k}g önce</td><td>${o.pk.join(' ')}</td><td>${P(o.s)}</td><td>${P(o.l)}</td><td>${P(o.us)}/${P(o.ul)}</td><td>${f(o.sc,0)}</td></tr>`,vr=(n,Bk)=>`<tr><td>${n}</td>${['AL','NO','SAT'].map(k=>`<td>${Bk[k].length?P(a(Bk[k])):'-'} <span class="m">(${Bk[k].length})</span></td>`).join('')}</tr>`;
-$('#bo').innerHTML=`<div class="card"><h3>6 rastgele deneme</h3><div class="scroll"><table><thead><tr><th>Tarih</th><th>Seçim</th><th>20G</th><th>120G</th><th>Evren</th><th>Skor</th></tr></thead>${out.map(ro).join('')}</table></div><div class="note">Ort: 20G ${P(a(out.map(o=>o.s)))} · 120G ${P(a(out.map(o=>o.l)))} · evreni geçme: ${hit(out.map(o=>o.s),out.map(o=>o.us))}/6 (kısa), ${hit(out.map(o=>o.l),out.map(o=>o.ul))}/6 (uzun)</div></div>
-<div class="card"><h3>Sinyal doğrulama (300 örnek)</h3><table><thead><tr><th>İleri getiri</th><th>AL</th><th>NÖTR</th><th>SAT</th></tr></thead>${vr('Kısa skor→20G',B)}${vr('Uzun skor→120G',BL)}</table><div class="note">AL grubu SAT grubundan belirgin yüksekse indikatör bilgi taşıyor demektir. DEMO verisi rastgele üretildiğinden gerçek veriyle yeniden test edin.</div></div>`}
-function mk(){const L=[['faiz','Faiz eğilimi (düşüş = +)'],['enf','Enflasyon eğilimi (düşüş = +)'],['risk','Küresel risk iştahı (VIX düşük = +)'],['kur','TL istikrarı (USDTRY sakin = +)']];
-$('#mc').innerHTML=L.map(([k,n])=>`<div style="margin-bottom:10px">${n}: <b id="m_${k}">0</b><input type="range" min="-2" max="2" step="1" value="0" data-k="${k}"></div>`).join('');
-document.querySelectorAll('#mc input').forEach(i=>i.oninput=()=>{M[i.dataset.k]=+i.value;$('#m_'+i.dataset.k).textContent=i.value;scan()})}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.v').forEach(e=>e.classList.remove('on'));b.classList.add('on');$('#v'+b.dataset.t).classList.add('on')});
-const show=t=>{document.querySelector('nav [data-t="1"]').click();$('#tk').value=t;analyze(t)};
-$('#tb').onclick=e=>{const r=e.target.closest('tr');if(r)show(r.dataset.t)};$('#go').onclick=()=>analyze($('#tk').value);$('#srt').onchange=scan;$('#bt').onclick=()=>{$('#bo').innerHTML='<div class="card">Hesaplanıyor…</div>';setTimeout(bt,30)};
-$('#ul').innerHTML=U.map(u=>`<option value="${u}">`).join('');mk();
-(async()=>{await Promise.all(U.map(load));scan()})();
+const tei=(c[n]-c[n-20])/c.slice(n-19).reduce((s,x,k)=>s+Math.abs(x-c[n-20+k]),0); // ÖZEL 1 Trend Verimliliği
+const vsp=(100-pct)/100*Math.sign(c[n]-b.m); // ÖZEL 2 Sıkışma Baskısı
+const s50=avg(c,50),vv=d.map(x=>x.v),vr=avg(vv,5)/avg(vv,50),vwe=(c[n]-s50)/sd(c,50)*vr; // ÖZEL 3 Hacim Ağırlıklı Yorgunluk
+const z=(zs(c,21)+zs(c,63)+zs(c,250))/3,L=d[n],P=(L.h+L.l+L.c)/3,y=d.slice(-250);// Z-Skor: rapordaki yöntem (1-3-12 ay ort.)
+return{c,n,r:R[n],R,h:h[n],hp:h[n-1],pb,b,pct,tei,vsp,vwe,vr,z,s5:avg(c,5),s20:avg(c,20),s21:avg(c,21),s50,s200:avg(c,200),p:c[n],mom:c[n]/c[Math.max(0,n-250)]-1,d1:c[n]/c[n-1]-1,at:atr(d),hi:Math.max(...y.map(x=>x.h)),lo:Math.min(...y.map(x=>x.l)),dh:L.h,dl:L.l,pv:{R2:P+L.h-L.l,R1:2*P-L.l,S1:2*P-L.h,S2:P-(L.h-L.l)}}}
+function beta(t){if(RPT.sum[t])return RPT.sum[t].beta;const c=D[t].map(x=>x.c),n=Math.min(250,UR.length,c.length-2),a=[],b=[];for(let i=0;i<n;i++){a.push(c[c.length-1-i]/c[c.length-2-i]-1);b.push(UR[UR.length-1-i])}const ma=avg(a,n),mb=avg(b,n);let cv=0,vr=0;for(let i=0;i<n;i++){cv+=(a[i]-ma)*(b[i]-mb);vr+=(b[i]-mb)**2}return cv/vr}
+function macro(t){const w=BANK.includes(t)?2.5:1.5;return cl((M.faiz*w+M.enf+M.risk*1.5+M.kur)/10*100+REG)}
+function score(d,t,rs=0,live=true){const x=ind(d),rp=x.r<30?20:x.r>75?-20:(x.r-50)*.4,mp=x.h>0?(x.h>x.hp?22:8):(x.h>x.hp?-8:-22);
+let st=cl(rp+mp+x.tei*35+x.vsp*20-cl(x.vwe,3)*8),lt=cl((x.s50>x.s200?20:-20)+(x.p>x.s200?15:-15)+cl(x.mom*100,40)*.75+rs*.5),mc=0,rk=0;
+if(live){mc=macro(t);rk=RPT.rec[t]?20:0;st+=mc*.1+rk;lt+=mc*.3+cl(-x.z*6,12)}return{st:cl(st),lt:cl(lt),mc,rk,x}}
+const sig=v=>v>40?['GÜÇLÜ AL','g']:v>15?['AL','g']:v<-40?['GÜÇLÜ SAT','r']:v<-15?['SAT','r']:['İZLE','a'],pl=v=>{const[a,c]=sig(v);return`<span class="pl ${c}">${a}</span>`},ch=(l,a,on)=>`<button class="ch ${on?'on':''}" data-a="${a}">${l}</button>`;
+function rows(){const UM=U.reduce((s,t)=>s+ind(D[t]).mom,0)/U.length;return U.map(t=>{const sc=score(D[t],t,cl((ind(D[t]).mom-UM)*100,40));return{t,sc,x:sc.x,st:sc.st,lt:sc.lt,c:(sc.st+sc.lt)/2}})}
+function home(){const R=rows().sort((a,b)=>b.c-a.c),top=R.slice(0,3),bot=R.slice(-3).reverse(),cd=o=>`<div class="kv" data-a="o:${o.t}" style="cursor:pointer"><b>${o.t}</b>${pl(o.c)}<span class="${col(o.x.d1)}">${f(o.x.d1*100)}%</span></div>`;
+$('#v0').innerHTML=`<div class="row"><input id="q" placeholder="Hisse ara (ör. THYAO)" list="ul"><button class="pr" data-a="q">ARA</button></div>
+<div class="qk">${[['⚡','Hızlı Tarama','c'],['📈','Kısa Vade','st'],['🏦','Uzun Vade','lt'],['📋','Rapor Listesi','rep']].map(([i,l,k])=>`<button data-a="qk:${k}"><span>${i}</span>${l}</button>`).join('')}</div>
+<h3>Piyasa özeti · Ziraat Yatırım ${RPT.tarih}</h3><div class="tiles">${RPT.idx.map(i=>`<div class="tile"><span class="m">${i[1]}</span><b>${f(i[2],0)}</b><span class="${col(i[3])}">${i[3]>0?'+':''}${f(i[3])}% · Ay ${f(i[5],1)}%</span></div>`).join('')}</div>
+<div class="card"><h3>Aracı kurum günlük öneri listesi × bizim skor</h3><table><thead><tr><th>Hisse</th><th>Kapanış</th><th>Satış</th><th>Stop</th><th>Skor</th></tr></thead>${Object.entries(RPT.rec).map(([t,r])=>`<tr data-a="o:${t}"><td><b>${t}</b></td><td>${f(r.c)}</td><td class="g">${f(r.s1)}</td><td class="r">${f(r.stop)}</td><td>${pl(R.find(o=>o.t==t).c)}</td></tr>`).join('')}</table></div>
+<div class="card"><h3>BIST 100 seviyeleri</h3>Destek <b class="g">${RPT.bist.sup.map(v=>f(v,0)).join(' · ')}</b><br>Direnç <b class="r">${RPT.bist.res.map(v=>f(v,0)).join(' · ')}</b><div class="note" style="margin-top:6px">${RPT.bist.y}</div></div>
+<div class="card"><h3>VİOP 30 Ekim kontratı</h3>Destek <b class="g">${RPT.viop.sup.map(v=>f(v,0)).join(' · ')}</b><br>Direnç <b class="r">${RPT.viop.res.map(v=>f(v,0)).join(' · ')}</b><div class="note" style="margin-top:6px">${RPT.viop.y}</div></div>
+<h3>Günün en güçlüleri</h3><div class="grid" style="margin-bottom:10px">${top.map(cd).join('')}</div><h3>En zayıflar</h3><div class="grid">${bot.map(cd).join('')}</div>`}
+function radar(){const A=rows(),R=A.filter(o=>RF.f=='all'||(RF.f=='al'&&o.c>15)||(RF.f=='iz'&&Math.abs(o.c)<=15)||(RF.f=='sa'&&o.c<-15)||(RF.f=='rep'&&RPT.rec[o.t])).sort((a,b)=>b[RF.s]-a[RF.s]);
+$('#tape').innerHTML=A.map(o=>`<span>${o.t} <span class="${col(o.x.d1)}">${o.x.d1>=0?'▲':'▼'}${f(Math.abs(o.x.d1)*100)}%</span></span>`).join('');const lv=Object.values(SRC).filter(v=>v=='Yahoo').length;$('#src').textContent=lv?'Yahoo canlı':'DEMO veri';
+$('#v1').innerHTML=`<div class="chs">${[['Tümü','all'],['AL','al'],['İZLE','iz'],['SAT','sa'],['Rapor','rep']].map(([l,k])=>ch(l,'rf:'+k,RF.f==k)).join('')}</div><div class="chs">${[['Birleşik','c'],['Kısa vade','st'],['Uzun vade','lt']].map(([l,k])=>ch('↕ '+l,'so:'+k,RF.s==k)).join('')}</div>
+<div class="card"><table><thead><tr><th>Kod</th><th>Fiyat</th><th>Değ.</th><th>K</th><th>U</th><th>Sinyal</th></tr></thead>${R.map(o=>`<tr data-a="o:${o.t}"><td><b>${o.t}</b>${RPT.rec[o.t]?' <span class="a">★</span>':''}</td><td>${f(o.x.p)}</td><td class="${col(o.x.d1)}">${f(o.x.d1*100)}%</td><td class="${col(o.st)}">${f(o.st,0)}</td><td class="${col(o.lt)}">${f(o.lt,0)}</td><td>${pl(o.c)}</td></tr>`).join('')}</table></div><div class="note">★ aracı kurum listesinde. K/U: kısa/uzun vade skoru. Yatırım tavsiyesi değildir.</div>`}
+function gauge(v){const[a,c]=sig(v),s=(v+100)/2,L=157;return`<svg viewBox="0 0 120 72" style="width:170px"><path d="M10 62A50 50 0 0 1 110 62" fill="none" stroke="var(--b)" stroke-width="10" stroke-linecap="round"/><path d="M10 62A50 50 0 0 1 110 62" fill="none" stroke="var(--${c})" stroke-width="10" stroke-linecap="round" stroke-dasharray="${L*s/100} 999"/><text x="60" y="52" text-anchor="middle" font-size="17" font-weight="800" fill="var(--${c})">${a}</text><text x="60" y="68" text-anchor="middle" font-size="8" fill="var(--m)">Güç %${f(s,0)}</text></svg>`}
+async function stock(){const t=ST.t;$('#v2').innerHTML='<div class="card">Yükleniyor…</div>';const d=await load(t);if(d.length<260){$('#v2').innerHTML='<div class="card r">Yetersiz veri</div>';return}
+const UM=U.reduce((s,u)=>s+ind(D[u]).mom,0)/U.length,s=score(d,t,cl((ind(d).mom-UM)*100,40)),x=s.x,c=(s.st+s.lt)/2,K=(l,v,k='')=>`<div class="kv"><span>${l}</span><b class="${k}">${v}</b></div>`,tb=ST.tab,bt=beta(t);let h=`<div class="row"><input id="tk" value="${t}" list="ul"><button class="pr" data-a="q2">ARA</button></div><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><b style="font-size:17px">${t}</b> <span class="m">${SRC[t]}${RPT.rec[t]?' · ★ rapor':''}</span><div class="big">${f(x.p)} ₺</div><span class="${col(x.d1)}">${x.d1>=0?'+':''}${f(x.d1*100)}%</span></div>${gauge(c)}</div></div><div class="chs">${[['g','Genel'],['c','Grafik'],['t','Teknik'],['r','Rapor']].map(([k,l])=>ch(l,'tab:'+k,tb==k)).join('')}</div>`;
+if(tb=='g'){const pos=cl((x.p-x.lo)/(x.hi-x.lo)*100,100);h+=`<div class="card"><h3>Hızlı bilgiler</h3><div class="grid">${K('Kısa vade',pl(s.st))}${K('Uzun vade',pl(s.lt))}${K('Makro',f(s.mc,0),col(s.mc))}${K('Beta',f(bt))}${K('Z-Skor',f(x.z),x.z<-1?'g':x.z>1.5?'r':'')}${K('RSI 14',f(x.r,1))}${K('12A getiri',f(x.mom*100,1)+'%',col(x.mom))}${K('Hacim oranı',f(x.vr)+'×')}${K('ATR',f(x.at))}</div></div><div class="card"><h3>Günlük aralık</h3><div class="rng"><i style="left:${cl((x.p-x.dl)/(x.dh-x.dl)*100,100)}%"></i></div><div style="display:flex;justify-content:space-between"><span>${f(x.dl)}</span><span>${f(x.dh)}</span></div><h3 style="margin-top:12px">52 hafta aralığı</h3><div class="rng"><i style="left:${pos}%"></i></div><div style="display:flex;justify-content:space-between"><span>${f(x.lo)}</span><span>${f(x.hi)}</span></div></div>`}
+if(tb=='c')h+=`<div class="chs">${[['1A',22],['3A',66],['6A',132],['1Y',250]].map(([l,n])=>ch(l,'per:'+n,ST.per==n)).join('')}</div><div class="card"><canvas id="cv"></canvas><div class="note"><span style="color:#f59e0b">━ MA20</span> <span style="color:#38bdf8">━ MA50</span> <span style="color:#a78bfa">━ MA200</span> · kesikli: pivot destek/direnç</div></div>`;
+if(tb=='t'){const S=(v,a,b)=>v>a?['AL','g']:v<b?['SAT','r']:['İZLE','a'],ma=(n,v)=>x.p>v?['AL','g']:['SAT','r'];const T=[['RSI (14)',f(x.r,1),x.r<30?['AL','g']:x.r>70?['SAT','r']:['İZLE','a']],['MACD hist.',f(x.h,3),x.h>0?['AL','g']:['SAT','r']],['SMA 5 (haftalık)',f(x.s5),ma(5,x.s5)],['SMA 21 (aylık)',f(x.s21),ma(21,x.s21)],['SMA 50',f(x.s50),ma(50,x.s50)],['SMA 200',f(x.s200),ma(200,x.s200)],['Bollinger %B',f(x.pb*100,0)+'%',x.pb<.1?['AL','g']:x.pb>.9?['SAT','r']:['İZLE','a']],['Z-Skor (1-3-12A)',f(x.z),x.z<-1?['AL','g']:x.z>1.5?['SAT','r']:['İZLE','a']],['★ TEI trend verimi',f(x.tei),S(x.tei,.3,-.3)],['★ VSP sıkışma',f(x.vsp),S(x.vsp,.6,-.6)],['★ VWE yorgunluk',f(x.vwe),x.vwe>2?['SAT','r']:x.vwe<-2?['AL','g']:['İZLE','a']],['Aracı kurum listesi',RPT.rec[t]?'Var':'Yok',RPT.rec[t]?['AL','g']:['—','m']]],al=T.filter(r=>r[2][1]=='g').length,sa=T.filter(r=>r[2][1]=='r').length;
+h+=`<div class="card"><h3>İndikatör sinyalleri · ${al} AL · ${sa} SAT</h3><table><thead><tr><th>Gösterge</th><th>Değer</th><th>Sinyal</th></tr></thead>${T.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td><span class="pl ${r[2][1]}">${r[2][0]}</span></td></tr>`).join('')}</table><div class="note" style="margin-top:6px">★ özel indikatörler: TEI = 20g net hareket / toplam yol; VSP = Bollinger genişlik yüzdeliği × yön; VWE = SMA50 z-sapması × hacim oranı. Z-Skor ve ortalamalar aracı kurum raporundaki yöntemle hesaplanır.</div></div>`}
+if(tb=='r'){const R=RPT.rec[t],Q=RPT.sum[t],pv=x.pv,e=x.p,sp=R?R.stop:e-2*x.at,tg=R?R.s1:e+3*x.at;
+h+=(R?`<div class="card"><h3>Günlük öneri · ${RPT.tarih}</h3><div class="grid">${K('Kapanış',f(R.c))}${K('Satış 1',f(R.s1),'g')}${K('Satış 2',f(R.s2),'g')}${K('Zarar-kes',f(R.stop),'r')}${K('Potansiyel','+'+f((R.s1/R.c-1)*100,1)+'%','g')}${K('Risk',f((R.stop/R.c-1)*100,1)+'%','r')}</div></div>`:`<div class="card note">${t} bugünkü aracı kurum listesinde yok; plan ATR ile hesaplandı.</div>`)+
+(Q?`<div class="card"><h3>Rapor özeti</h3><div class="grid">${K('Beta',f(Q.beta))}${K('Z-Skor',f(Q.z))}${K('Hf. ort.',f(Q.wk))}${K('Ay. ort.',f(Q.mo))}${K('Hf. yük/düş',f(Q.hi,1)+'/'+f(Q.lo,1))}${K('Hacim',f(Q.vol,0)+'/'+f(Q.vm,0)+' mn')}</div></div>`:'')+
+`<div class="card"><h3>İşlem planı · risk yönetimi</h3><div class="grid">${K('Giriş',f(e))}${K('Stop',f(sp),'r')}${K('Hedef',f(tg),'g')}${K('Risk/Getiri',f((tg-e)/Math.max(e-sp,.01)))}${K('Stop %',f((sp/e-1)*100,1)+'%','r')}${K('Hedef %','+'+f((tg/e-1)*100,1)+'%','g')}</div></div><div class="card"><h3>Pivot destek / direnç</h3>Direnç <b class="r">${f(pv.R2)} · ${f(pv.R1)}</b><br>Destek <b class="g">${f(pv.S1)} · ${f(pv.S2)}</b><div class="note" style="margin-top:6px">Piyasa rejimi (BIST100 raporu): ${f(REG,0)} → skora makro olarak eklenir. Yatırım tavsiyesi değildir.</div></div>`}
+$('#v2').innerHTML=h;if(tb=='c')draw(d,x,ST.per)}
+function draw(d,x,N){const cv=$('#cv'),W=cv.width=cv.clientWidth*2,H=cv.height=760,g=cv.getContext('2d'),cs=getComputedStyle(document.documentElement),C=k=>cs.getPropertyValue(k).trim(),L=d.length,i0=L-N,c=x.c,ph=H*.58,sl=d.slice(i0),mx=Math.max(...sl.map(b=>b.h)),mn=Math.min(...sl.map(b=>b.l)),Y=v=>8+(1-(v-mn)/(mx-mn))*(ph-16),bw=(W-80)/N,X=i=>i*bw+bw/2;
+g.fillStyle=C('--p');g.fillRect(0,0,W,H);g.font='20px sans-serif';g.lineWidth=1;
+for(let k=0;k<5;k++){const v=mn+(mx-mn)*k/4,y=Y(v);g.strokeStyle=C('--b');g.beginPath();g.moveTo(0,y);g.lineTo(W-76,y);g.stroke();g.fillStyle=C('--m');g.fillText(f(v),W-74,y+6)}
+sl.forEach((b,i)=>{const up=b.c>=b.o,k=up?C('--g'):C('--r');g.strokeStyle=g.fillStyle=k;g.lineWidth=2;g.beginPath();g.moveTo(X(i),Y(b.h));g.lineTo(X(i),Y(b.l));g.stroke();const a=Y(Math.max(b.o,b.c)),z=Y(Math.min(b.o,b.c));g.fillRect(X(i)-bw*.35,a,Math.max(1,bw*.7),Math.max(2,z-a))});
+[[20,'#f59e0b'],[50,'#38bdf8'],[200,'#a78bfa']].forEach(([n,k])=>{g.beginPath();let on=0;sl.forEach((b,i)=>{if(i0+i+1<n)return;const v=avg(c.slice(0,i0+i+1),n);on?g.lineTo(X(i),Y(v)):g.moveTo(X(i),Y(v));on=1});g.strokeStyle=k;g.lineWidth=2.5;g.stroke()});
+g.setLineDash([8,6]);[[x.pv.S1,'--g'],[x.pv.R1,'--r']].forEach(([v,k])=>{if(v<mn||v>mx)return;g.strokeStyle=C(k);g.lineWidth=1.5;g.beginPath();g.moveTo(0,Y(v));g.lineTo(W-76,Y(v));g.stroke()});g.setLineDash([]);
+const vm=Math.max(...sl.map(b=>b.v)),vy=H*.62,vh=H*.14;g.globalAlpha=.55;sl.forEach((b,i)=>{g.fillStyle=b.c>=b.o?C('--g'):C('--r');const hh=b.v/vm*vh;g.fillRect(X(i)-bw*.35,vy+vh-hh,Math.max(1,bw*.7),hh)});g.globalAlpha=1;
+const ry=v=>H*.80+(1-v/100)*H*.17;g.strokeStyle=C('--b');[30,70].forEach(v=>{g.beginPath();g.moveTo(0,ry(v));g.lineTo(W-76,ry(v));g.stroke()});g.beginPath();x.R.slice(i0).forEach((v,i)=>i?g.lineTo(X(i),ry(v)):g.moveTo(X(i),ry(v)));g.strokeStyle=C('--c');g.lineWidth=2.5;g.stroke();g.fillStyle=C('--m');g.fillText('Hacim',6,vy+16);g.fillText('RSI '+f(x.r,1),6,H*.80+16)}
+function bt(){const Lm=Math.min(...U.map(t=>D[t].length)),out=[],a=v=>v.reduce((x,y)=>x+y)/v.length,rk=()=>125+Math.floor(Math.random()*(Lm-261-125));
+for(let r=0;r<6;r++){const k=rk(),pk=[...U].sort(()=>Math.random()-.5).slice(0,4),ret=(t,h)=>{const c=D[t],i=c.length-1-k;return c[i+h].c/c[i].c-1};
+out.push({k,pk,s:a(pk.map(t=>ret(t,20))),l:a(pk.map(t=>ret(t,120))),us:a(U.map(t=>ret(t,20))),ul:a(U.map(t=>ret(t,120))),sc:a(pk.map(t=>{const z=score(D[t].slice(0,D[t].length-k),t,0,false);return(z.st+z.lt)/2}))})}
+const hit=(v,u)=>v.filter((x,i)=>x>u[i]).length,B={AL:[],NO:[],SAT:[]},BL={AL:[],NO:[],SAT:[]};
+for(let q=0;q<300;q++){const t=U[Math.floor(Math.random()*U.length)],k=rk(),c=D[t],i=c.length-1-k,s=score(c.slice(0,i+1),t,0,false),b=s.st>15?'AL':s.st<-15?'SAT':'NO',b2=s.lt>15?'AL':s.lt<-15?'SAT':'NO';B[b].push(c[i+20].c/c[i].c-1);BL[b2].push(c[i+120].c/c[i].c-1)}
+const P=v=>`<span class="${col(v)}">${f(v*100,1)}%</span>`,vr=(n,Bk)=>`<tr><td>${n}</td>${['AL','NO','SAT'].map(k=>`<td>${Bk[k].length?P(a(Bk[k])):'-'} <span class="m">(${Bk[k].length})</span></td>`).join('')}</tr>`;
+$('#bo').innerHTML=`<div class="card"><h3>6 rastgele deneme (indikatörsüz alım)</h3><div class="scroll"><table><thead><tr><th>Tarih</th><th>Seçim</th><th>20G</th><th>120G</th><th>Evren</th><th>Skor</th></tr></thead>${out.map(o=>`<tr><td>${o.k}g önce</td><td>${o.pk.join(' ')}</td><td>${P(o.s)}</td><td>${P(o.l)}</td><td>${P(o.us)}/${P(o.ul)}</td><td>${f(o.sc,0)}</td></tr>`).join('')}</table></div><div class="note">Ort: 20G ${P(a(out.map(o=>o.s)))} · 120G ${P(a(out.map(o=>o.l)))} · evreni geçme ${hit(out.map(o=>o.s),out.map(o=>o.us))}/6 kısa, ${hit(out.map(o=>o.l),out.map(o=>o.ul))}/6 uzun</div></div><div class="card"><h3>Sinyal doğrulama (300 örnek)</h3><table><thead><tr><th>İleri getiri</th><th>AL</th><th>İZLE</th><th>SAT</th></tr></thead>${vr('Kısa→20G',B)}${vr('Uzun→120G',BL)}</table><div class="note">AL grubu SAT grubundan belirgin yüksekse indikatör bilgi taşıyor demektir. DEMO veri rastgele üretildiğinden gerçek veriyle yeniden deneyin.</div></div>`}
+function test(){$('#v3').innerHTML=`<div class="card"><h3>İndikatörsüz geriye dönük deneme</h3><div class="note" style="margin-bottom:8px">Rastgele geçmiş tarihlerde 4 hisse alınır; 20 gün (kısa) ve 120 gün (uzun) sonrası izlenir. Skor, o gün hesaplanan sinyaldir; karar için kullanılmaz.</div><button class="pr" data-a="bt">TESTİ ÇALIŞTIR</button></div><div id="bo"></div>`}
+function mac(){const L=[['faiz','Faiz eğilimi (düşüş = +)'],['enf','Enflasyon eğilimi (düşüş = +)'],['risk','Küresel risk iştahı (VIX düşük = +)'],['kur','TL istikrarı (kur sakin = +)']];
+$('#v4').innerHTML=`<div class="card"><h3>Makro etkenler (−2 … +2)</h3>${L.map(([k,n])=>`<div style="margin-bottom:10px">${n}: <b id="m_${k}">${M[k]}</b><input type="range" min="-2" max="2" step="1" value="${M[k]}" data-k="${k}"></div>`).join('')}<div class="note">Makro skor kısa vadeye %10, uzun vadeye %30 etki eder; bankalar faize 2,5× duyarlı. Piyasa rejimi (rapor): <b>${f(REG,0)}</b>.</div></div><div class="card"><h3>Veri kaynakları</h3><div class="note">Yahoo Finance bağlayıcısı hazır; APK içinde CORS'suz çalışır, bağlanamazsa DEMO verisi kullanılır. Aracı kurum raporu (Ziraat Yatırım, ${RPT.tarih}) koddaki RPT bloğundan okunur; her gün yeni PDF'i bana vererek güncelleyebilirsin.</div></div>`;
+document.querySelectorAll('#v4 input').forEach(i=>i.oninput=()=>{M[i.dataset.k]=+i.value;$('#m_'+i.dataset.k).textContent=i.value;home();radar()})}
+const NV=[['⌂','Ana Sayfa'],['☰','Radar'],['◩','Hisse'],['⟲','Test'],['⚙','Makro']];
+function go(i){document.querySelectorAll('.v').forEach((e,k)=>e.classList.toggle('on',k==i));$('#nv').innerHTML=NV.map((n,k)=>`<button class="${k==i?'on':''}" data-a="go:${k}"><b>${n[0]}</b>${n[1]}</button>`).join('');scrollTo(0,0)}
+document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;const[a,v]=el.dataset.a.split(':');
+if(a=='go')go(+v);else if(a=='o'){ST.t=v;ST.tab='g';go(2);stock()}else if(a=='tab'){ST.tab=v;stock()}else if(a=='per'){ST.per=+v;stock()}else if(a=='rf'){RF.f=v;radar()}else if(a=='so'){RF.s=v;radar()}
+else if(a=='qk'){RF.f=v=='rep'?'rep':'all';RF.s=v=='rep'?'c':v;radar();go(1)}else if(a=='q'||a=='q2'){const t=$(a=='q'?'#q':'#tk').value.trim().toUpperCase();if(t){ST.t=t;ST.tab='g';go(2);stock()}}
+else if(a=='bt'){$('#bo').innerHTML='<div class="card">Hesaplanıyor…</div>';setTimeout(bt,30)}});
+$('#ul').innerHTML=U.map(u=>`<option value="${u}">`).join('');go(0);test();mac();
+(async()=>{await Promise.all(U.map(load));const Lm=Math.min(...U.map(t=>D[t].length));for(let i=1;i<Lm;i++)UR.push(U.reduce((s,t)=>{const c=D[t],j=c.length-Lm+i;return s+c[j].c/c[j-1].c-1},0)/U.length);home();radar()})();
 </script></body></html>
