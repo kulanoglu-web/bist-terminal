@@ -86,7 +86,7 @@ async function loadI(t){for(const k of['Yahoo','GitHub']){try{let j;if(k=='Yahoo
 async function loadAllI(){if(ILD)return;ILD=1;IT0=1;if(RF.m=='i')radarI();await Promise.all(U.map(loadI));ILD=0;if(RF.m=='i'&&$('#v1').classList.contains('on'))radarI()}
 function isc(d){const n=d.length-1,c=d.map(x=>x.c),L=d[n],day=b=>new Date((b.t+10800)*1000).toISOString().slice(0,10),dy=day(L),ses=d.filter(b=>day(b)==dy),pr=d.filter(b=>day(b)<dy),pc=pr.length?pr[pr.length-1].c:ses[0].o,
 vw=ses.reduce((s,b)=>s+(b.h+b.l+b.c)/3*b.v,0)/(ses.reduce((s,b)=>s+b.v,0)||1)||c[n],R=rsi(c)[n]||50,e12=ema(c,12),e26=ema(c,26),mm=e12.map((x,i)=>x-e26[i]),sg=ema(mm,9),h=mm[n]-sg[n],hp=mm[n-1]-sg[n-1],
-orb=ses.slice(0,2),oh=Math.max(...orb.map(b=>b.h)),ol=Math.min(...orb.map(b=>b.l)),m1=c[n]/c[Math.max(0,n-4)]-1,vr=L.v/(avg(d.map(b=>b.v),40)||1),
+orb=ses.slice(0,2),oh=Math.max(...orb.map(b=>b.h)),ol=Math.min(...orb.map(b=>b.l)),m1=c[n]/c[Math.max(0,n-4)]-1,vr=(d.slice(-3).reverse().find(b=>b.v>0)||L).v/(avg(d.map(b=>b.v),40)||1),
 te=(c[n]-c[n-20])/c.slice(n-19).reduce((s,x,k)=>s+Math.abs(x-c[n-20+k]),0)||0,dc=c[n]/pc-1,vd=(c[n]/vw-1)*100;
 const sc=cl((R<30?15:R>75?-15:(R-50)*.5)+(h>0?(h>hp?15:6):(h>hp?-6:-15))+cl(vd*10,20)+(c[n]>oh?15:c[n]<ol?-15:0)+cl(m1*100*8,20)+(vr>1.8?10*Math.sign(m1):0)+te*20);
 return{p:c[n],dc,m1,vd,vr,R,sc,tm:L.t}}
