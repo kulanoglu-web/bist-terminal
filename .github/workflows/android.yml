@@ -1,6 +1,8 @@
 name: Build APK
 on:
   push:
+  schedule:
+    - cron: '30 15 * * 1-5'
   workflow_dispatch:
 jobs:
   build:
@@ -14,6 +16,8 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+      - run: node scripts/fetch-data.mjs
+        continue-on-error: true
       - run: npm install
       - run: npx cap add android
       - run: npx cap sync android
