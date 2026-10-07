@@ -1,0 +1,2 @@
+{"appId":"com.bist.terminal","appName":"BIST Terminal","webDir":"www",
+"plugins":{"CapacitorHttp":{"enabled":true}}}
