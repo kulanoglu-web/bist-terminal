@@ -1,8 +1,9 @@
 name: Build APK
 on:
   push:
-  schedule:
-    - cron: '30 15 * * 1-5'
+    paths-ignore:
+      - 'scripts/**'
+      - '.github/workflows/data.yml'
   workflow_dispatch:
 permissions:
   contents: write
@@ -18,14 +19,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - run: node scripts/fetch-data.mjs
-        continue-on-error: true
-      - name: Arşivi kaydet
-        run: |
-          git config user.name github-actions
-          git config user.email actions@github.com
-          git add -f www/data
-          git diff --cached --quiet || (git commit -m "veri arşivi [skip ci]" && git pull --rebase -q && git push)
       - run: npm install
       - run: npx cap add android
       - run: npx cap sync android
@@ -34,10 +27,10 @@ jobs:
         with:
           name: bist-terminal-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
-      - name: APK yayınla (Releases)
+      - name: APK yayinla (Releases)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           cp android/app/build/outputs/apk/debug/app-debug.apk BistTerminal.apk
           gh release delete latest -y --cleanup-tag || true
-          gh release create latest BistTerminal.apk --title "BIST Terminal (son sürüm)" --notes "Otomatik derleme" --latest
+          gh release create latest BistTerminal.apk --title "BIST Terminal (son surum)" --notes "Otomatik derleme" --latest

@@ -1,0 +1,30 @@
+name: Veri
+on:
+  schedule:
+    - cron: '*/30 7-15 * * 1-5'
+    - cron: '45 15 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: veri
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/build-data.mjs
+      - name: Yayinla (data dali)
+        run: |
+          cd out
+          git init -q -b data
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add -A
+          git commit -q -m "veri $(date -u +%FT%TZ)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" data
