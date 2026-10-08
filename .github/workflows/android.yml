@@ -4,12 +4,10 @@ on:
     paths-ignore:
       - 'scripts/**'
       - '.github/workflows/data.yml'
+      - '.github/workflows/research.yml'
   workflow_dispatch:
 permissions:
   contents: write
-concurrency:
-  group: apk
-  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -45,4 +43,4 @@ jobs:
         run: |
           cp android/app/build/outputs/apk/debug/app-debug.apk BistTerminal.apk
           gh release delete latest -y --cleanup-tag || true
-          gh release create latest BistTerminal.apk --title "BIST Terminal (son surum)" --notes "Surum 5.${{ github.run_number }} (imza: sabit anahtar)" --latest
+          gh release create latest BistTerminal.apk --title "BIST Terminal (son surum)" --notes "Surum 5.${{ github.run_number }} (sabit imza: guncelleme eskisinin ustune kurulur)" --latest
