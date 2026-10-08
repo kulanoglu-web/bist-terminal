@@ -31,6 +31,15 @@ jobs:
           echo "$KS" | base64 -d > ~/.android/debug.keystore
       - name: Surum numarasi
         run: sed -i "s/versionCode 1/versionCode ${{ github.run_number }}/; s/versionName \"1.0\"/versionName \"5.${{ github.run_number }}\"/" android/app/build.gradle
+      - name: Sabit imza anahtari
+        env:
+          KS: ${{ secrets.DEBUG_KEYSTORE_B64 }}
+        run: |
+          test -n "$KS" || { echo "DEBUG_KEYSTORE_B64 yok"; exit 1; }
+          mkdir -p ~/.android
+          echo "$KS" | base64 -d > ~/.android/debug.keystore
+      - name: Surum numarasi
+        run: sed -i "s/versionCode 1/versionCode ${{ github.run_number }}/; s/versionName \"1.0\"/versionName \"5.${{ github.run_number }}\"/" android/app/build.gradle
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
