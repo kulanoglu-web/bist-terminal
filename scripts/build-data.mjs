@@ -51,7 +51,7 @@ function addFund(rows,F){
  let n=0;rows.forEach(r=>{const m=M[r.t];if(!m){r.fd=null;return}
   const sv=mean([rk('fpe',m.fpe,0),rk('ev',m.ev,0),rk('pb',m.pb,0),rk('fy',m.fy,1)]),sgr=mean([rk('rg',m.rg,1),rk('eg',m.eg,1),rk('ebg',m.ebg,1)]),sq=mean([rk('roe',m.roe,1),rk('nm',m.nm,1),rk('nd',m.nd,0)]),ws=[[sv,.4],[sgr,.3],[sq,.3]].filter(a=>a[0]!=null),ts=ws.length>=2?ws.reduce((s,a)=>s+a[0]*a[1],0)/ws.reduce((s,a)=>s+a[1],0):null;
   const S=sm[r.sec||'?']||{pe:gpe,ev:gev},fvs=[];if(m.ef>0&&S.pe)fvs.push(m.ef*S.pe);const sh=m.mc>0?m.mc/m.p:0;if(m.eb>0&&S.ev&&m.nd0!=null&&sh>0){const q=(S.ev*m.eb-m.nd0)/sh;if(q>0)fvs.push(q)}
-  const fv=fvs.length?Math.max(.25*m.p,Math.min(4*m.p,fvs.reduce((a,b)=>a+b,0)/fvs.length)):null,pu=m.pt>0&&m.pn>=3?Math.max(-.9,Math.min(3,m.pt/m.p-1)):null;
+  const fv=fvs.length?Math.max(.5*m.p,Math.min(2*m.p,fvs.reduce((a,b)=>a+b,0)/fvs.length)):null,pu=m.pt>0&&m.pn>=3?Math.max(-.9,Math.min(3,m.pt/m.p-1)):null;
   if(ts==null&&fv==null&&pu==null){r.fd=null;return}n++;
   r.fd={sv:sv==null?null:Math.round(sv),sg:sgr==null?null:Math.round(sgr),sq:sq==null?null:Math.round(sq),ts:ts==null?null:Math.round(ts),fv:fv==null?null:+fv.toFixed(2),fu:fv==null?null:+(fv/m.p-1).toFixed(3),fn:fvs.length,pt:pu==null?null:+m.pt.toFixed(2),pu:pu==null?null:+pu.toFixed(3),pn:m.pn,rm:m.rm,pe:m.fpe,pb:m.pb,ev:m.ev,fy:m.fy,roe:m.roe,nm:m.nm,rg:m.rg,eg:m.eg,nd:m.nd,spe:S.pe}});
  return n}
