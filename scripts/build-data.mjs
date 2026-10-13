@@ -31,4 +31,5 @@ const last=Math.max(...R.map(o=>o.b[o.b.length-1].t));
 const rnd=(k,v)=>typeof v=='number'&&isFinite(v)?Math.round(v*1e5)/1e5:v;
 fs.writeFileSync(OUT+'/scan.json',JSON.stringify({u:new Date().toISOString(),last,xs:XS,mkt:MKT,fq:FQ,sq:SQ,model:'ridge-v1',ver:6,br,rows},rnd));
 R.forEach(o=>fs.writeFileSync(`${OUT}/d/${o.t}.json`,JSON.stringify({b:o.b.map(b=>[b.t,b.o,b.h,b.l,b.c,b.v]),dv:o.dv.map(v=>[v.t,v.a])},rnd)));
+if(fs.existsSync('reports/reports.json'))fs.copyFileSync('reports/reports.json',OUT+'/reports.json');
 console.log('scan satir',rows.length,'likit',liq.length,'MKT',MKT,'genislik',br.a50.toFixed(2),br.a200.toFixed(2),'boyut KB',Math.round(fs.statSync(OUT+'/scan.json').size/1024));
