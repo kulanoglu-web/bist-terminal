@@ -18,6 +18,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Ajan portfoy onceki durumu (data dalindan)
+        run: |
+          mkdir -p prev
+          git fetch -q --depth 1 origin data || { echo "data dali alinamadi, ajan durumu korunamaz"; exit 1; }
+          git show origin/data:agent.json > prev/agent.json 2>/dev/null || { rm -f prev/agent.json; echo "agent.json yok: ajan sifirdan baslar"; }
       - run: node scripts/build-data.mjs
       - name: Yayinla (data dali)
         run: |
