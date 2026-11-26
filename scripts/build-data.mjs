@@ -11,7 +11,9 @@ async function get(t){if(LOCAL){const p=`${LOCAL}/d/${t}.json`;if(!fs.existsSync
  for(const h of['query1','query2','query1']){try{const r=await fetch(`https://${h}.finance.yahoo.com/v8/finance/chart/${t}.IS?range=3y&interval=1d&events=div`,{headers:H});if(!r.ok){await sleep(400);continue}const q=(await r.json()).chart.result[0],z=q.indicators.quote[0],ev=q.events&&q.events.dividends;
  const b=q.timestamp.map((s,i)=>({t:s,o:z.open[i],c:z.close[i],h:z.high[i],l:z.low[i],v:z.volume[i]||0})).filter(x=>x.c>0&&x.o>0&&x.h>0&&x.l>0);return{b,dv:ev?Object.values(ev).map(x=>({t:x.date,a:x.amount})).sort((a,c)=>a.t-c.t):[]}}catch(e){await sleep(400)}}return null}
 const L=await universe(),R=[],q=[...L];let bad=0;
-await Promise.all([0,1,2,3].map(async()=>{while(q.length){const u=q.shift(),d=await get(u.t);if(!d||d.b.length<260){bad++;continue}R.push({...u,...d});await sleep(120)}}));
+await Promise.all([0,1,2,3].map(async()=>{while(q.length){const u=q.shift(),d=await get(u.t);if(!d||d.b.length<260){bad++;continue}R.push({...u,...d});if(!LOCAL)await sleep(120)}}));
+// CUT: yerel simulasyon icin son N cubugu at (yalniz LOCAL ile)
+const CUT=LOCAL?(+process.env.CUT||0):0;if(CUT){R.forEach(o=>{o.b=o.b.slice(0,o.b.length-CUT)});for(let i=R.length-1;i>=0;i--)if(R[i].b.length<260)R.splice(i,1)}
 console.log('veri alinan',R.length,'basarisiz/kisa',bad);
 const avg=(a,n)=>a.slice(-n).reduce((x,y)=>x+y,0)/Math.min(n,a.length);
 R.forEach(o=>{o.live=o.b[o.b.length-1];o.cb=E.isPartial(o.b)?o.b.slice(0,-1):o.b;o.x=E.ind(o.cb);o.f=E.FEd(o.cb);o.tv=avg(o.cb.map(b=>b.c*b.v),20)});
@@ -67,6 +69,10 @@ const last=Math.max(...R.map(o=>o.b[o.b.length-1].t));
 const rnd=(k,v)=>typeof v=='number'&&isFinite(v)?Math.round(v*1e5)/1e5:v;
 fs.writeFileSync(OUT+'/scan.json',JSON.stringify({u:new Date().toISOString(),last,xs:XS,mkt:MKT,fq:FQ,sq:SQ,model:'ridge-v1',ver:6,br,rows},rnd));
 R.forEach(o=>fs.writeFileSync(`${OUT}/d/${o.t}.json`,JSON.stringify({b:o.b.map(b=>[b.t,b.o,b.h,b.l,b.c,b.v]),dv:o.dv.map(v=>[v.t,v.a])},rnd)));
-if(fs.existsSync('reports/reports.json'))fs.copyFileSync('reports/reports.json',OUT+'/reports.json');
+// ===== AJAN PORTFOY (sanal): onceki durum workflow tarafindan prev/agent.json'a konur =====
+{const{runAgent}=await import('./agent.mjs'),pf=process.env.AGENT_PREV||'prev/agent.json';let prev=null,raw=null;if(fs.existsSync(pf)){raw=fs.readFileSync(pf,'utf8');try{prev=JSON.parse(raw)}catch(e){prev=undefined}}
+ if(prev===undefined){fs.writeFileSync(OUT+'/agent.json',raw);console.log('ajan: onceki durum bozuk, degistirilmeden korundu')}
+ else{try{const{AG,msg}=runAgent(prev,{R,rows,liq:liq.map(o=>o.t),crash:br.a50<.2&&!MKT});fs.writeFileSync(OUT+'/agent.json',JSON.stringify(AG));console.log('ajan',msg)}catch(e){console.log('ajan HATA',String(e.stack||e).slice(0,300));if(raw)fs.writeFileSync(OUT+'/agent.json',raw)}}}
+if(fs.existsSync('reports/reports.json'))fs.copyFileSync('reports/reports.json',OUT+'/reports.json');if(fs.existsSync('reports/agent-sim.json'))fs.copyFileSync('reports/agent-sim.json',OUT+'/agent-sim.json');
 console.log('scan satir',rows.length,'likit',liq.length,'MKT',MKT,'genislik',br.a50.toFixed(2),br.a200.toFixed(2),'boyut KB',Math.round(fs.statSync(OUT+'/scan.json').size/1024));
 if(!LOCAL){try{await import('./build-context.mjs')}catch(e){console.log('ctx HATA',String(e).slice(0,200))}}
