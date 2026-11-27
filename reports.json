@@ -1,0 +1,120 @@
+{
+ "ASELS": {
+  "kurum": "Global Menkul Değerler",
+  "analist": "Zafer İsmail Belli",
+  "tarih": "2026-10-12",
+  "baslik": "Savunma Sanayiinde Liderlik, Büyümede Yeni Dönem",
+  "oneri": "AL",
+  "hedef": 536.7,
+  "fiyat": 351.25,
+  "sektor": "İletişim ve Savunma",
+  "pd_bn": 1602,
+  "adet_mn": 4560.0,
+  "fiili": 26.0,
+  "yabanci": 49.6,
+  "yabanci12": 49.9,
+  "bist100_agirlik": 11.07,
+  "aralik": [
+   171.28,
+   450.0
+  ],
+  "perf": {
+   "1h": -3.2,
+   "1a": -12.7,
+   "3a": -2.1,
+   "ybb": 51.6
+  },
+  "rolatif": {
+   "1h": -3.1,
+   "1a": 3.3,
+   "3a": 12.6,
+   "ybb": 39.2
+  },
+  "ortak": "TSK Güçlendirme Vakfı %74,2",
+  "para": "USD mn",
+  "yillar": [
+   "2024",
+   "2025",
+   "2026T",
+   "2027T"
+  ],
+  "ciro": [
+   3413,
+   4210,
+   5676,
+   7605
+  ],
+  "favok": [
+   858,
+   1104,
+   1533,
+   2091
+  ],
+  "netkar": [
+   434,
+   699,
+   1126,
+   1436
+  ],
+  "favok_marj": [
+   25.2,
+   26.2,
+   27.0,
+   27.5
+  ],
+  "net_marj": [
+   12.7,
+   16.6,
+   19.8,
+   18.9
+  ],
+  "fd_favok": [
+   38.8,
+   30.2,
+   21.7,
+   15.9
+  ],
+  "fk": [
+   75.1,
+   46.7,
+   29.0,
+   22.7
+  ],
+  "fd_satis": [
+   9.77,
+   7.92,
+   5.87,
+   4.38
+  ],
+  "nb_favok": [
+   0.5,
+   0.3,
+   0.4,
+   0.6
+  ],
+  "dps": [
+   0.0,
+   0.0,
+   0.01,
+   0.02
+  ],
+  "tv": [
+   0.0,
+   0.0,
+   0.1,
+   0.3
+  ],
+  "payout": [
+   1.1,
+   0.0,
+   3.3,
+   7.0
+  ],
+  "ozet": [
+   "Bakiye siparişin 2026 sonunda 20,4 mlr USD'den 28,7 mlr USD'ye çıkması bekleniyor (sipariş/satış oranı yaklaşık 2,5×): gelir görünürlüğü yüksek.",
+   "İhracat siparişleri 2025'te 2,07 mlr USD'ye ulaştı; 2030'da 4,5 mlr USD bekleniyor (Polonya ile 410 mn USD'lik elektronik harp sözleşmesi dahil).",
+   "Oğulbey Teknoloji Üssü ile seri üretim kapasitesinin yaklaşık 2 katına çıkması bekleniyor; 2026-32 yatırımı 2,19 mlr USD.",
+   "Satış gelirinin 2025'te 4,21 mlr USD'den 2028'de 9,54 mlr USD'ye, FAVÖK marjının %26,2'den %27,8'e yükselmesi bekleniyor; finansal kaldıraç düşük."
+  ]
+ }
+}
